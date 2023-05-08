@@ -9,10 +9,9 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
 <header>
   <h1>La ley de Hooke</h1>
-  <button>English</button>
+  <span> </span>
   <nav>
     <ul>
       <li><a href="#introduccion">Introducción</a></li>
@@ -24,44 +23,72 @@
     </ul>
   </nav>
 </header>
-
 <main>
   <section id="introduccion">
     <h2>Introducción</h2>
-    <p>Breve explicación de la ley de Hooke y su importancia en la física.</p>
-    <!-- Imágenes o gráficos que muestren ejemplos de la aplicación de la ley de Hooke en la vida cotidiana. -->
+    <p>La <a href="https://es.wikipedia.org/wiki/Ley_de_elasticidad_de_Hooke" target="_blank" id="link1"> Ley de Hooke</a> La Ley de Hooke es una ley fundamental de la física que describe la relación entre la fuerza aplicada a un resorte y la deformación resultante del mismo. Es ampliamente utilizada en sistemas y fenómenos físicos, desde la mecánica de materiales hasta la dinámica de partículas y la termodinámica, y se aplica en el diseño de dispositivos mecánicos y sistemas de ingeniería.</p>
+    <div class="imagenes">
+      <img src="imagenes/leyhooke.png" alt="Esquema ley de hooke">
+      <img src="https://via.placeholder.com/400x300?text=Imagen+de+ejemplo+2" alt="Imagen de ejemplo 2">
+    </div>
   </section>
-
   <section id="simulacion">
     <h2>Simulación</h2>
-    <!-- Una animación interactiva que muestre cómo funciona la ley de Hooke y cómo se aplica en diferentes situaciones. -->
-    <!-- Controles para ajustar los parámetros, como la constante de elasticidad o la fuerza aplicada. -->
-    <!-- Una sección de preguntas frecuentes (FAQ) para ayudar al usuario a entender los conceptos detrás de la simulación. -->
+    <div class="simulador">
+      <div class="animacion" >
+
+      </div>
+      <div class="controles">
+        <!-- Controles para ajustar los parámetros, como la constante de elasticidad o la fuerza aplicada. -->
+        <label for="input-constante">Constante elástica:</label>
+        <input type="range" id="input-constante">Constante elástica:</label>
+
+
+
+        <label for="input-fuerza-restauradora"> Fuerza restauradora </label>
+        <input type="text" id="input-fuerza-restauradora">
+      </div> <span> </span>
+    <button id="boton-simular"> Simular </button> </div>
+
   </section>
 
   <section id="ejemplos">
-    <h2>Ejemplos</h2>
-    <!-- Una galería de imágenes y videos que muestren ejemplos reales de la aplicación de la ley de Hooke en la vida cotidiana y en diferentes campos de la ingeniería y la física. -->
-  </section>
+    <!-- aca van ejemplos de la aplicacion de la ley deh hooke-->
+    <div>
+      <h3> Algunas aplicaciones practicas de la Ley de Hooke</h3>
+      <p> <span> </span></p>
 
+    </div>
+  </section>
   <section id="actividades">
-    <h2> Actividades</h2>
-    <!-- Descripción de las actividades que el usuario puede realizar para experimentar con la ley de Hooke. -->
+    <!-- seccion con actividades relacionadas con la ley de hooke -->
+    <h2>Actividades</h2>
+    <ul>
+      <li>Realizar un experimento para demostrar la ley de Hooke.</li>
+      <li>Diseñar y construir un dispositivo mecánico que utilice la ley de Hooke.</li>
+      <li>Investigar sobre otros fenómenos físicos que sean elásticos y que puedan describirse mediante una ley similar a la de Hooke.</li>
+      <li>Realizar ejercicios y problemas relacionados con la ley de Hooke.</li>
+      <li>Discutir en grupo las aplicaciones y limitaciones de la ley de Hooke en la vida cotidiana.</li>
+    </ul>
+  </section>
+  <section id="bibliografia">
+    <!-- seccion con la bibliografia y referencias -->
+    <h2>Bibliografía</h2>
+    <ul>
+      <li>Hooke, R. (1678). "De Potentia Restitutiva, or of Spring, Explaining the Power of Springing Bodies". Philosophical Transactions of the Royal Society of London. 3 (82): 44–55.</li>
+      <li>Young, H. D., & Freedman, R. A. (2012). University Physics with Modern Physics (12th ed.). Addison-Wesley.</li>
+      <li>Halliday, D., Resnick, R., & Walker, J. (2014). Fundamentals of Physics (10th ed.). John Wiley & Sons.</li>
+    </ul>
+  </section>
+  <section id="contacto">
+
+    <h2>Contacto</h2>
+    <p>Si tienes alguna pregunta o sugerencia, puedes contactarme a través de mi correo electrónico: @gmail.com</p>
+
   </section>
 </main>
-
 <footer>
-  <nav>
-    <ul>
-      <li><a href="#introduccion">Introducción</a></li>
-      <li><a href="#simulacion">Simulación</a></li>
-      <li><a href="#ejemplos">Ejemplos</a></li>
-      <li><a href="#actividades">Actividades</a></li>
-      <li><a href="#bibliografia">Bibliografía</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
-  </nav>
+  <p>Simulador de la ley de Hooke - Todos los derechos reservados</p>
 </footer>
-
 </body>
 </html>
