@@ -6,7 +6,7 @@ Este proyecto consiste en un simulador de la Ley de Hooke, que permite visualiza
 
 La página web del simulador de la Ley de Hooke incluye una interfaz interactiva en la que el usuario puede modificar la cantidad de fuerza aplicada al objeto, así como las propiedades elásticas del mismo. Además, se muestra una gráfica en tiempo real que representa la relación entre la fuerza y la deformación, permitiendo al usuario visualizar la Ley de Hooke de una manera más clara.
 
-## Autores
+## Autor
 
 Este proyecto ha sido desarrollado por Mateo Pappalardo, como parte del curso de Laboratorio de Computación II en la Universidad Católica de Córdoba
 
@@ -16,7 +16,6 @@ Este simulador ha sido desarrollado utilizando las siguientes tecnologías:
 
 - HTML5
 - CSS3
-- JavaScript
 
 
 ## Enlace a la página
