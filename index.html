@@ -1,100 +1,124 @@
-  <!DOCTYPE html>
-  <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Mateo Pappalardo">
-    <meta name="description" content="simulador de la ley de hooke">
-    <meta name="keywords" content="fisica, hooke, elastica, constante, simulador, ley">
-    <title>Ley de Hooke</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-    <link rel="icon" href="imagenes/favicon.ico">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Mateo Pappalardo">
+  <meta name="description" content="simulador de la ley de hooke">
+  <meta name="keywords" content="fisica, hooke, elastica, constante, simulador, ley">
+  <title>Ley de Hooke</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+  <link rel="icon" href="imagenes/favicon.ico">
+  <script type="text/javascript" src="Funciones.js"></script>
 
-  </head>
-  <body>
-  <header>
-    <h1>La ley de Hooke</h1>
-    <span> </span>
-    <nav>
-      <ul>
-        <li><a href="#introduccion">Introducción</a></li>
-        <li><a href="#simulacion">Simulación</a></li>
-        <li><a href="#ejemplos">Ejemplos</a></li>
-        <li><a href="#actividades">Actividades</a></li>
-        <li><a href="#bibliografia">Bibliografía</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <section id="introduccion">
-      <h2>Introducción</h2>
-      <p>La <a href="https://es.wikipedia.org/wiki/Ley_de_elasticidad_de_Hooke" target="_blank" id="link1"> Ley de Hooke</a>  es una ley fundamental de la física que describe la relación entre la fuerza aplicada a un resorte y la deformación resultante del mismo. Es ampliamente utilizada en sistemas y fenómenos físicos, desde la mecánica de materiales hasta la dinámica de partículas y la termodinámica, y se aplica en el diseño de dispositivos mecánicos y sistemas de ingeniería.</p>
-      <div class="imagenes">
-        <img src="imagenes/leyhooke.png" alt="Esquema ley de hooke">
-        <img src="imagenes/leyhooke.png" alt="Imagen de ejemplo 2">
-      </div>
-    </section>
-    <section id="simulacion">
-      <h2>Simulación</h2>
-      <div class="simulador">
-        <div class="animacion" >
-        <canvas>  </canvas>
-        </div>
-        <div class="controles">
-          <!-- Controles para ajustar los parámetros, como la constante de elasticidad o la fuerza aplicada. -->
-          <label for="input-constante">Constante elástica:</label>
-          <input type="range" id="input-constante">
+</head>
+<body>
+<header>
+  <h1>La ley de Hooke</h1>
+  <span> </span>
+  <nav>
+    <ul>
+      <li><a href="#introduccion">Introducción</a></li>
+      <li><a href="#simulacion">Simulación</a></li>
+      <li><a href="#ejemplos">Ejemplos</a></li>
+      <li><a href="#actividades">Actividades</a></li>
+      <li><a href="#bibliografia">Bibliografía</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section id="introduccion">
+    <h2>Introducción</h2>
+    <p>La <a href="https://es.wikipedia.org/wiki/Ley_de_elasticidad_de_Hooke" target="_blank" id="link1"> Ley de Hooke</a>  es una ley fundamental de la física que describe la relación entre la fuerza aplicada a un resorte y la deformación resultante del mismo. Es ampliamente utilizada en sistemas y fenómenos físicos, desde la mecánica de materiales hasta la dinámica de partículas y la termodinámica, y se aplica en el diseño de dispositivos mecánicos y sistemas de ingeniería.</p>
+    <div class="imagenes">
+      <img src="imagenes/leyhooke.png" alt="Esquema ley de hooke">
+      <img src="imagenes/leyhooke.png" alt="Imagen de ejemplo 2">
+    </div>
+  </section>
+  <h2 class="titulos">Simulación</h2>
+  <div class="simulador">
+    <div class="animacion" >
+
+      <canvas id="canvas" ></canvas>
+
+    </div>
+
+    <div id="radio-sim">
+      <input type="radio"  name="opcion" value="simular" onload="mostrarDiv('div-simular')" onclick= "mostrarDiv('div-simular')"> Simular
+      <input type="radio" name="opcion" value="calcular" onclick="mostrarDiv('div-calcular')"> Calcular constante elástica
+    </div>
+    <div class="controles">
 
 
+      <!-- Controles para ajustar los parámetros, como la constante de elasticidad o la fuerza aplicada. -->
+      <label id="input-cons" for="input-constante" >Constante elástica:</label>
+      <input  type="range" id="input-constante" min="0" max="1" step="0.01" onchange="mostrarValorRange(this.value)">
+      <span id="valor-range"></span>
+      <span id = "unidades-cons" class="unidades">N/m</span>
 
-          <label for="input-fuerza-restauradora"> Fuerza restauradora </label>
-          <input type="text" id="input-fuerza-restauradora">
-          <label for="input-desplazamiento-horizontal">Desplazamiento horizontal</label>
-          <input type="text" id="input-desplazamiento-horizontal">
+      <label for="input-fuerza-restauradora">Fuerza restauradora</label>
+      <input type="text" id="input-fuerza-restauradora">
+      <span class="unidades">N</span>
 
-        </div> <span> </span>
-      <button id="boton-simular"> Simular </button> </div>
+      <label for="input-desplazamiento-horizontal">Desplazamiento horizontal</label>
+      <input type="text" id="input-desplazamiento-horizontal">
+      <span class="unidades">m</span>
 
-    </section>
 
-    <section id="ejemplos">
-      <!-- aca van ejemplos de la aplicacion de la ley deh hooke-->
-      <div>
-        <h3> Algunas aplicaciones practicas de la Ley de Hooke</h3>
-        <p> <span> </span></p>
+    </div>
 
-      </div>
-    </section>
-    <section id="actividades">
-      <!-- seccion con actividades relacionadas con la ley de hooke -->
-      <h2>Actividades</h2>
-      <ul>
-        <li>Realizar un experimento para demostrar la ley de Hooke.</li>
-        <li>Diseñar y construir un dispositivo mecánico que utilice la ley de Hooke.</li>
-        <li>Buscar actividades y comparar los resultados con el simulador</li>
-      </ul>
-    </section>
-    <section id="bibliografia">
-      <!-- seccion con la bibliografia y referencias -->
-      <h2>Bibliografía</h2>
-      <ul>
-        <li>Hooke, R. (1678). "De Potentia Restitutiva, or of Spring, Explaining the Power of Springing Bodies". Philosophical Transactions of the Royal Society of London. 3 (82): 44–55.</li>
-        <li>Young, H. D., & Freedman, R. A. (2012). University Physics with Modern Physics (12th ed.). Addison-Wesley.</li>
-        <li>Halliday, D., Resnick, R., & Walker, J. (2014). Fundamentals of Physics (10th ed.). John Wiley & Sons.</li>
-      </ul>
-    </section>
-    <section id="contacto">
+    <div id="div-simular" style="display: none;">
+      <button id="boton-simular" onclick="simularHooke()">Simular</button>
+      <button id="boton-limpiar1" onclick="limpiarCampos()">Limpiar campos</button>
+    </div>
 
-      <h2>Contacto</h2>
-      <p>Si tienes alguna pregunta o sugerencia, puedes contactarme a través de mi correo electrónico: 2328796@ucc.edu.ar</p>
+    <div id="div-calcular" style="display: none;">
+      <button id="calcular-constante" onclick="calcularConstante()">Calcular Constante Elástica [k]</button>
+      <button id="boton-limpiar" onclick="limpiarCampos()">Limpiar campos</button>
+      <label id="label-constante" for="resultado-constante" hidden="true">Resultado constante:</label>
+      <input type="text" id="resultado-constante" disabled hidden="true">
+      <span id="texto-constante"></span>
 
-    </section>
-  </main>
-  <footer>
-    <p>Simulador de la ley de Hooke - Todos los derechos reservados</p>
-  </footer>
-  </body>
-  </html>
+    </div>
+  </div>
+
+  <section id="ejemplos">
+    <!-- aca van ejemplos de la aplicacion de la ley deh hooke-->
+    <div>
+      <h3> Algunas aplicaciones practicas de la Ley de Hooke</h3>
+      <p> <span> </span></p>
+    </div>
+
+  </section>
+  <section id="actividades">
+    <!-- seccion con actividades relacionadas con la ley de hooke -->
+    <h2>Actividades</h2>
+    <ul>
+      <li>Realizar un experimento para demostrar la ley de Hooke.</li>
+      <li>Diseñar y construir un dispositivo mecánico que utilice la ley de Hooke.</li>
+      <li>Buscar actividades y comparar los resultados con el simulador</li>
+    </ul>
+  </section>
+  <section id="bibliografia">
+    <!-- seccion con la bibliografia y referencias -->
+    <h2>Bibliografía</h2>
+    <ul>
+      <li>Hooke, R. (1678). "De Potentia Restitutiva, or of Spring, Explaining the Power of Springing Bodies". Philosophical Transactions of the Royal Society of London. 3 (82): 44–55.</li>
+      <li>Young, H. D., & Freedman, R. A. (2012). University Physics with Modern Physics (12th ed.). Addison-Wesley.</li>
+      <li>Halliday, D., Resnick, R., & Walker, J. (2014). Fundamentals of Physics (10th ed.). John Wiley & Sons.</li>
+    </ul>
+  </section>
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Si tienes alguna pregunta o sugerencia, puedes contactarme a través de mi correo electrónico: 2328796@ucc.edu.ar</p>
+  </section>
+
+</main>
+<footer>
+  <p>Simulador de la ley de Hooke - Todos los derechos reservados</p>
+</footer>
+</body>
+</html>
