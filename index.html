@@ -58,12 +58,25 @@
       <span id = "unidades-cons" class="unidades">N/m</span>
 
       <label for="input-fuerza-restauradora">Fuerza restauradora</label>
-      <input type="text" id="input-fuerza-restauradora">
-      <span class="unidades">N</span>
+<input 
+    type="number" 
+    id="input-fuerza-restauradora" 
+    max="1000000" 
+    step="any" 
+    placeholder="Ingrese un valor (N)"
+    title="Ingrese un número menor o igual a 1,000,000">
+<span class="unidades">N</span>
 
-      <label for="input-desplazamiento-horizontal">Desplazamiento horizontal</label>
-      <input type="text" id="input-desplazamiento-horizontal">
-      <span class="unidades">m</span>
+<label for="input-desplazamiento-horizontal">Desplazamiento horizontal</label>
+<input 
+    type="number" 
+    id="input-desplazamiento-horizontal" 
+    max="1000000" 
+    step="any" 
+    placeholder="Ingrese un valor (m)"
+    title="Ingrese un número menor o igual a 1,000,000">
+<span class="unidades">m</span>
+
 
 
     </div>

@@ -1,0 +1,31 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Ignorar configuraciones específicas de IntelliJ/IDEA
+.idea/
+# Ignorar archivos de compilación
+*.class
+*.war
+*.ear
+*.jar
+*.zip
+*.tar.gz
+*.rar
+*.tar.bz2
+*.tar
+*.tgz
+*.exe
+*.dll
+*.so
+*.lib
+*.dylib
+# Ignorar archivos de compilación de Java
+*.class
+# Ignorar archivos de compilación de Maven
+target/
+
+
+# Ignorar archivos generados por macOS
+.DS_Store

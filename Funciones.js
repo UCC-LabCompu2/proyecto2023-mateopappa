@@ -3,34 +3,49 @@
  * @method simularHooke
  */
 const simularHooke = () => {
-    verificarCampos();
+    // Captura los valores ingresados por el usuario
     let constanteElastica = parseFloat(document.getElementById("input-constante").value);
     let fuerzaRestauradora = parseFloat(document.getElementById("input-fuerza-restauradora").value);
     let desplazamientoHorizontal = parseFloat(document.getElementById("input-desplazamiento-horizontal").value);
-    const dataX = [0, fuerzaRestauradora, desplazamientoHorizontal];
-    const dataY = [0, constanteElastica, constanteElastica];
 
-    if (fuerzaRestauradora && constanteElastica) {
-        // calcula desplazamiento horizontal
-        desplazamientoHorizontal = fuerzaRestauradora / constanteElastica;
-    } else if (desplazamientoHorizontal && constanteElastica) {
-        // calcula la fuerza restauradora
-        fuerzaRestauradora = constanteElastica * desplazamientoHorizontal;
+    // Validación: Asegurarse de que al menos dos valores sean válidos
+    let valoresValidos = 0;
+    if (!isNaN(constanteElastica) && constanteElastica > 0) valoresValidos++;
+    if (!isNaN(fuerzaRestauradora) && fuerzaRestauradora > 0) valoresValidos++;
+    if (!isNaN(desplazamientoHorizontal) && desplazamientoHorizontal > 0) valoresValidos++;
+
+    if (valoresValidos < 2) {
+        alert("Por favor, ingresa al menos dos valores válidos para realizar la simulación.");
+        return; // Salir si no se cumplen los requisitos
     }
 
-    // Mostrar los resultados en los campos de entrada
+    // Realizar cálculos basados en los valores válidos
+    if (!isNaN(fuerzaRestauradora) && !isNaN(constanteElastica)) {
+        desplazamientoHorizontal = fuerzaRestauradora / constanteElastica; // Calcular desplazamiento
+    } else if (!isNaN(desplazamientoHorizontal) && !isNaN(constanteElastica)) {
+        fuerzaRestauradora = constanteElastica * desplazamientoHorizontal; // Calcular fuerza restauradora
+    } else if (!isNaN(desplazamientoHorizontal) && !isNaN(fuerzaRestauradora)) {
+        constanteElastica = fuerzaRestauradora / desplazamientoHorizontal; // Calcular constante elástica
+    }
+
+    // Mostrar los resultados calculados en los campos de entrada
     document.getElementById("input-constante").value = constanteElastica.toFixed(2);
     document.getElementById("input-fuerza-restauradora").value = fuerzaRestauradora.toFixed(2);
     document.getElementById("input-desplazamiento-horizontal").value = desplazamientoHorizontal.toFixed(2);
 
+    // Preparar datos para el gráfico
+    const dataX = [0, desplazamientoHorizontal];
+    const dataY = [0, fuerzaRestauradora];
+
+    // Dibujar el gráfico
     const canvas = document.getElementById("canvas");
     const context = canvas.getContext("2d");
     drawGraph(context, dataX, dataY);
+
+    // Deshabilitar los campos tras la simulación
     deshabilitarCampos();
-
-
-
 };
+
 /**
  * Deshabilita los campos de entrada para no permitir cambios hasta que no se toque el boton limpiarcampos
  * @method deshabilitarCampos
@@ -69,31 +84,44 @@ const limpiarCampos = () => {
  * Función para verificar si los campos ingresados son válidos y blanquearlos si no lo son, luego de mandar un alert
  * @method verificarCampos
  */
+/**
+ * Función para verificar si los campos ingresados son válidos y limpiar solo los incorrectos
+ * @method verificarCampos
+ */
 const verificarCampos = () => {
-    const constanteElastica = document.getElementById("input-constante").value;
-    const fuerzaRestauradora = document.getElementById("input-fuerza-restauradora").value;
-    const desplazamientoHorizontal = document.getElementById("input-desplazamiento-horizontal").value;
+    const inputConstante = document.getElementById("input-constante");
+    const inputFuerzaRestauradora = document.getElementById("input-fuerza-restauradora");
+    const inputDesplazamientoHorizontal = document.getElementById("input-desplazamiento-horizontal");
 
-    // Verificar si se proporcionaron al menos 2 valores
-    let valoresIngresados = 0;
+    let valoresCorrectos = 0;
 
-    if (!isNaN(constanteElastica) && constanteElastica !== '') {
-        valoresIngresados++;
+    // Validar constante elástica
+    if (isNaN(parseFloat(inputConstante.value)) || inputConstante.value === "") {
+        inputConstante.value = ""; // Limpiar si no es válido
+    } else {
+        valoresCorrectos++;
     }
 
-    if (!isNaN(fuerzaRestauradora) && fuerzaRestauradora !== '') {
-        valoresIngresados++;
+    // Validar fuerza restauradora
+    if (isNaN(parseFloat(inputFuerzaRestauradora.value)) || inputFuerzaRestauradora.value === "") {
+        inputFuerzaRestauradora.value = ""; // Limpiar si no es válido
+    } else {
+        valoresCorrectos++;
     }
 
-    if (!isNaN(desplazamientoHorizontal) && desplazamientoHorizontal !== '') {
-        valoresIngresados++;
+    // Validar desplazamiento horizontal
+    if (isNaN(parseFloat(inputDesplazamientoHorizontal.value)) || inputDesplazamientoHorizontal.value === "") {
+        inputDesplazamientoHorizontal.value = ""; // Limpiar si no es válido
+    } else {
+        valoresCorrectos++;
     }
 
-    if (valoresIngresados < 2) {
-        alert("Debe ingresar al menos 2 valores numéricos para realizar el cálculo.");
-        limpiarCampos();
+    // Verificar que al menos dos valores sean correctos
+    if (valoresCorrectos < 2) {
+        alert("Debe ingresar al menos 2 valores numéricos válidos para realizar el cálculo.");
     }
 };
+
 
 /**
  * muestra el valor del range una vez modificado este input-type
@@ -109,16 +137,41 @@ const mostrarValorRange = (valor) => {
  * @method calcularConstante
  */
 const calcularConstante = () => {
-    const fuerzaRestauradora = parseFloat(document.getElementById("input-fuerza-restauradora").value);
-    const desplazamientoHorizontal = parseFloat(document.getElementById("input-desplazamiento-horizontal").value);
+    const LIMITE_VALOR = 1000000; // Límite de valor permitido
 
-    if (isNaN(fuerzaRestauradora) || isNaN(desplazamientoHorizontal)) {
-        alert("Por favor, ingrese valores válidos para la fuerza restauradora y el desplazamiento horizontal.");
-        document.getElementById("input-fuerza-restauradora").value = "";
-        document.getElementById("input-desplazamiento-horizontal").value = "";
+    const inputFuerzaRestauradora = document.getElementById("input-fuerza-restauradora");
+    const inputDesplazamientoHorizontal = document.getElementById("input-desplazamiento-horizontal");
+
+    const fuerzaRestauradora = parseFloat(inputFuerzaRestauradora.value);
+    const desplazamientoHorizontal = parseFloat(inputDesplazamientoHorizontal.value);
+
+    let mensajeError = "";
+
+    // Validar fuerza restauradora
+    if (isNaN(fuerzaRestauradora)) {
+        mensajeError += "Ingrese un valor válido para la fuerza restauradora.\n";
+        inputFuerzaRestauradora.value = "";
+    } else if (!validarTamanioNumeros(fuerzaRestauradora, LIMITE_VALOR)) {
+        mensajeError += `La fuerza restauradora no debe exceder ${LIMITE_VALOR}.\n`;
+        inputFuerzaRestauradora.value = "";
+    }
+
+    // Validar desplazamiento horizontal
+    if (isNaN(desplazamientoHorizontal)) {
+        mensajeError += "Ingrese un valor válido para el desplazamiento horizontal.\n";
+        inputDesplazamientoHorizontal.value = "";
+    } else if (!validarTamanioNumeros(desplazamientoHorizontal, LIMITE_VALOR)) {
+        mensajeError += `El desplazamiento horizontal no debe exceder ${LIMITE_VALOR}.\n`;
+        inputDesplazamientoHorizontal.value = "";
+    }
+
+    // Mostrar errores si existen
+    if (mensajeError) {
+        alert(mensajeError);
         return;
     }
 
+    // Si los valores son válidos, calcular constante de elasticidad
     const constanteElastica = fuerzaRestauradora / desplazamientoHorizontal;
     const resultadoConstante = document.getElementById("resultado-constante");
     const labelConstante = document.getElementById("label-constante");
@@ -127,6 +180,7 @@ const calcularConstante = () => {
     resultadoConstante.style.display = "inline-block";
     labelConstante.style.display = "inline-block";
 };
+
 /**
  * muestra u oculta los div segun la seleccion del usuario en el
  * @param {string} divId- id del div a mostrar/ocultar
@@ -167,9 +221,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /**
  * dibuja el grafico, ejes cartesianos y los nombres de los mismos, de forma que hace una representacion basica de la relacion lineal que explica la ley de Hooke
- * @param context
- * @param dataX
- * @param dataY
+ * @param {CanvasRenderingContext2D} context - El contexto 2D del canvas donde se dibujará el gráfico.
+ * @param {number[]} dataX - Conjunto de datos en el eje X (desplazamiento horizontal).
+ * @param {number[]} dataY - Conjunto de datos en el eje Y (fuerza aplicada o fuerza restauradora).
  * @method drawGraph
  */
 const drawGraph = (context, dataX, dataY) => {
@@ -231,4 +285,11 @@ const limpiarGrafico = () => {
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
     context.clearRect(0, 0, canvasWidth, canvasHeight);
+};
+
+const validarTamanioNumeros = (valor, limite) => {
+    if (Math.abs(valor) > limite) {
+        return false;
+    }
+    return true;
 };
