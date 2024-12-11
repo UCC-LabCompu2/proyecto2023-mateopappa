@@ -20,5 +20,5 @@ Este simulador ha sido desarrollado utilizando las siguientes tecnologías:
 
 ## Enlace a la página
 
-Este simulador está disponible en GitHub Pages haciendo [click aqui](ucc-labcompu2.github.io/proyecto2023-mateopappa/).
+Este simulador está disponible en GitHub Pages haciendo [click aqui](https://ucc-labcompu2.github.io/proyecto2023-mateopappa/index.html).
 
